@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub - Version Control Made Simple</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="parallax-bg">
+        <div class="parallax-orb"></div>
+        <div class="parallax-orb"></div>
+    </div>
+    <div class="cursor-trail"></div>
+    
+    <div class="container">
+    <header>
+        <h1>Git & GitHub</h1>
+        <p class="subtitle">Version Control for Everyone</p>
+    </header>
+
+    <section>
+        <h2>What is Git?</h2>
+        <p>Git is a <strong>version control system</strong> that tracks changes to your files over time. Think of it like a detailed save system for your code - you can save snapshots of your project at any point and go back to previous versions if something goes wrong.</p>
+        
+        <div class="highlight">
+            <strong>Why use Git?</strong>
+            <ul>
+                <li>Never lose your work - every change is saved</li>
+                <li>Work on different versions simultaneously</li>
+                <li>See exactly what changed and when</li>
+                <li>Easily undo mistakes</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>What is GitHub?</h2>
+        <p>GitHub is a <strong>cloud platform</strong> that hosts your Git repositories online. While Git manages your files locally on your computer, GitHub stores a copy on the internet so you can:</p>
+        <ul>
+            <li>Access your code from any computer</li>
+            <li>Share code with collaborators</li>
+            <li>Showcase your projects to others</li>
+            <li>Discover open-source projects</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>How It Works</h2>
+        <p>The basic workflow looks like this:</p>
+        
+        <div class="workflow">
+            <span class="step">1. Make changes</span>
+            <span class="arrow" style="--i:0">→</span>
+            <span class="step">2. Stage files</span>
+            <span class="arrow" style="--i:1">→</span>
+            <span class="step">3. Commit</span>
+            <span class="arrow" style="--i:2">→</span>
+            <span class="step">4. Push</span>
+        </div>
+
+        <p><strong>Key Concepts:</strong></p>
+        <ul>
+            <li><strong>Repository (Repo):</strong> A folder that contains your project and its history</li>
+            <li><strong>Commit:</strong> A snapshot of your changes - like saving a game checkpoint</li>
+            <li><strong>Branch:</strong> A separate line of development - great for trying new features</li>
+            <li><strong>Push:</strong> Send your commits to GitHub</li>
+            <li><strong>Pull:</strong> Download changes from GitHub to your computer</li>
+            <li><strong>Merge:</strong> Combine changes from different branches</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Why It's Useful for Teams</h2>
+        <p>Git and GitHub shine when working with others:</p>
+        
+        <div class="highlight">
+            <strong>Collaboration Made Easy</strong>
+            <ul>
+                <li><strong>Multiple people can work on the same project</strong> without overwriting each other's changes</li>
+                <li><strong>Branches</strong> let team members work on features independently, then merge when ready</li>
+                <li><strong>Pull Requests</strong> allow code review before merging - catch bugs early</li>
+                <li><strong>Issues & Projects</strong> help organize tasks and track progress</li>
+                <li><strong>History</strong> shows who changed what, making it easy to debug</li>
+            </ul>
+        </div>
+
+        <p>No more emailing code files back and forth or asking "who has the latest version?" - GitHub keeps everyone in sync!</p>
+    </section>
+
+    <section>
+        <h2>Basic Commands</h2>
+        <ul>
+            <li><code>git init</code> - Start a new repository</li>
+            <li><code>git clone</code> - Copy a repository from GitHub</li>
+            <li><code>git add</code> - Stage changes for commit</li>
+            <li><code>git commit -m "message"</code> - Save your changes</li>
+            <li><code>git push</code> - Upload to GitHub</li>
+            <li><code>git pull</code> - Download latest changes</li>
+            <li><code>git branch</code> - Create or view branches</li>
+            <li><code>git merge</code> - Combine branches</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Built to help you understand version control - Start using Git today!</p>
+    </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = `${index * 0.1}s`;
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.style.animationDelay = `${0.6 + index * 0.15}s`;
+                step.classList.add('visible');
+            });
+
+            const cursor = document.querySelector('.cursor-trail');
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursor.classList.add('active');
+            });
+
+            document.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+            });
+
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                cursor.style.left = cursorX - 10 + 'px';
+                cursor.style.top = cursorY - 10 + 'px';
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            let lastScroll = 0;
+            const orbs = document.querySelectorAll('.parallax-orb');
+            
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                orbs.forEach((orb, i) => {
+                    const speed = (i + 1) * 0.05;
+                    orb.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+                lastScroll = scrolled;
+            });
+
+            document.querySelectorAll('a, button, .step, code').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursor.style.background = '#fff';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursor.style.background = 'var(--accent)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
